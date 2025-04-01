@@ -1,11 +1,11 @@
 #!/usr/bin/bash
 
 ldx=1                                 # Line index
-lmx=`wc songs.list|awk '{print $1}'`  # Total lines in playlist
+lmx=`wc song.list|awk '{print $1}'`   # Total lines in playlist
 
 while [ $ldx -le $lmx ]
 do
-  line=`head -n $ldx songs.list|tail -n1`                                                                  # Get Current line
+  line=`head -n $ldx song.list|tail -n1`                                                                  # Get Current line
   new_name=`echo ${line[@]}|sed -e 's/ - /-/g' -e 's/ /_/g'|tr [:upper:] [:lower:]`                        # Format the new name like: 01_song_name-artist_name
 
   yt-dlp -x --audio-format best --restrict-filenames "ytsearch:`echo ${line[@]}|sed -e 's/^[0-9]\+ //g'`"  # Search / download from youtube
